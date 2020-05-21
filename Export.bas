@@ -61,13 +61,21 @@ Sub ExportAsJson()
         Next c
     
         JSON = Left(JSON, Len(JSON) - 8) & "  }" & vbCrLf & "]"
-    
         frmJsonViewer.jsonData.Text = frmJsonViewer.jsonData.Text & vbCrLf & JSON
     
     Next Table
     
     If (objWorksheet.ListObjects.Count > 1) Then
-        frmJsonViewer.jsonData.Text = "[" & frmJsonViewer.jsonData.Text & vbCrLf & "]"
+        JSON = ""
+        Dim lines() As String
+        
+        lines = Split(frmJsonViewer.jsonData.Text, vbCrLf)
+        
+        For Each Line In lines
+            JSON = JSON + "  " + Line + vbCrLf
+        Next Line
+        
+        frmJsonViewer.jsonData.Text = "[" & JSON & "]"
         frmJsonViewer.jsonData.Text = Replace(frmJsonViewer.jsonData.Text, "]" & vbCrLf & "[", "]," & vbCrLf & "[")
     End If
     
