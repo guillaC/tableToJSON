@@ -29,7 +29,6 @@ Sub ExportAsJson()
         Next c
         
         frmJsonViewer.jsonTree.Nodes.Add "JSON", tvwChild, Key:=Table.Name, Text:="[" & tableCount & "] - " & Table.Name
-        lastColumnLetter = Split(Cells(1, colCountTitle).Address, "$")(1)
     
         For Each c In Table.DataBodyRange
                 dataCount = dataCount + 1
